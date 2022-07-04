@@ -1,8 +1,7 @@
-import { API_URL } from './../../app.constants';
+import {TODO_JPA_API_URL } from './../../app.constants';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Todo } from '../../list-todos/list-todos.component';
-
+import { Todo } from '../../list-todos/list-todos.component'
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +13,27 @@ export class TodoDataService {
   ) { }
 
   retrieveAllTodos(username: string) {
-    return this.http.get<Todo[]>(`${API_URL}/users/${username}/todos/`);
+    return this.http.get<Todo[]>(`${TODO_JPA_API_URL}/users/${username}/todos`);
     //console.log("Execute Hello World Bean Service")
   }
 
   deleteTodo(username: string, id: any){
-    return this.http.delete(`${API_URL}/${username}/todos/${id}`);
+    return this.http.delete(`${TODO_JPA_API_URL}/users/${username}/todos/${id}`);
   }
 
-  retrieveTodo(username: any, id: any){
-    return this.http.get<Todo>(`${API_URL}/${username}/todos/${id}`);
+  retrieveTodo(username: string, id: any){
+    return this.http.get<Todo>(`${TODO_JPA_API_URL}/users/${username}/todos/${id}`);
   }
 
-  updateTodo(username: any, id: any, todo: any){
+  updateTodo(username: string, id: any, todo: Todo){
     return this.http.put(
-      `${API_URL}/${username}/todos/${id}`
+          `${TODO_JPA_API_URL}/users/${username}/todos/${id}`
                 , todo);
   }
 
-  createTodo(username: any, todo: any){
+  createTodo(username: string, todo: Todo){
     return this.http.post(
-              `${API_URL}/${username}/todos`
+              `${TODO_JPA_API_URL}/users/${username}/todos`
                 , todo);
   }
 

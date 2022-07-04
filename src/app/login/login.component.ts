@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   password = ''
   errorMessage = 'Invalid Credentials'
   invalidLogin = false
+  basicAuthenticationService: any;
 
   //Router
   //Angular.giveMeRouter
@@ -34,6 +35,38 @@ export class LoginComponent implements OnInit {
     } else {
       this.invalidLogin = true
     }
+  }
+
+  handleBasicAuthLogin() {
+    // console.log(this.username);
+    //if(this.username==="in28minutes" && this.password === 'dummy') {
+    this.basicAuthenticationService.executeAuthenticationService(this.username, this.password)
+        .subscribe(
+          (          data: any) => {
+            console.log(data)
+            this.router.navigate(['welcome', this.username])
+            this.invalidLogin = false      
+          },
+          (          error: any) => {
+            console.log(error)
+            this.invalidLogin = true
+          }
+        )
+  }
+
+  handleJWTAuthLogin() {
+    this.basicAuthenticationService.executeJWTAuthenticationService(this.username, this.password)
+        .subscribe(
+          (          data: any) => {
+            console.log(data)
+            this.router.navigate(['welcome', this.username])
+            this.invalidLogin = false      
+          },
+          (          error: any) => {
+            console.log(error)
+            this.invalidLogin = true
+          }
+        )
   }
 
 }

@@ -59,8 +59,9 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedToken() {
-    if(this.getAuthenticatedUser())
-      return sessionStorage.getItem(TOKEN)
+   // if(this.getAuthenticatedUser())
+   if (true)
+    return sessionStorage.getItem(TOKEN)
   }
 
   isUserLoggedIn() {
@@ -78,6 +79,4 @@ export class BasicAuthenticationService {
 export class AuthenticationBean{
   constructor(public message:string) { }
 } 
-
-
 
